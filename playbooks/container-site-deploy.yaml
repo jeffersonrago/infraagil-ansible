@@ -1,0 +1,9 @@
+- name: Deploy do site 
+  hosts: docker
+  tasks:
+    - name: copiando o conteudo do site
+      copy:
+        src: /opt/jenkins/workspace/Site-X/build/index.html
+        dest: /srv/site_exercicio/
+
+      

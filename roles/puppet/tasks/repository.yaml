@@ -1,0 +1,10 @@
+- name: Adicionando repositorio do puppet Yum
+  yum_repository:
+    name: puppet
+    description: Repositorio do pupper
+    baseurl: https://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
+  when: ansible_os_family == "RedHat"
+   
+- name: Adicionando repositorio do puppet Get
+  apt_repository:
+    repo: deb https://apt.puppetlabs.com/puppet5-release-wheezy.deb

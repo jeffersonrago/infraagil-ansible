@@ -1,0 +1,30 @@
+- name: Build de container do projeto Dexter
+  hosts: docker
+  tasks:
+    - name: criando a rede docker
+      docker_network:
+        name: network-sitex
+        ipam_options:
+          subnet: '172.2.0.0/16'
+          gateway: 172.2.0.1
+          iprange: 172.2.0.0/24
+
+    - name: criando container site1
+      docker_container:
+        name: site1
+        networks:
+          - name: network-sitex
+            ipv4_address: 172.2.0.2
+        image: httpd
+        volumes:
+          - /srv/site_exercicio:/usr/local/apache2/htdocs/
+
+    - name: criando container site2
+      docker_container:
+        name: site2
+        networks:
+          - name: network-sitex
+            ipv4_address: 172.2.0.3
+        image: httpd
+        volumes:
+          - /srv/site_exercicio:/usr/local/apache2/htdocs/

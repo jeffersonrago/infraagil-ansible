@@ -1,0 +1,46 @@
+- name: criando meu usuario
+  hosts: all
+  tasks:
+   - name: criando usuario
+     user:
+       name: "{{item}}"
+       shell: /bin/bash
+     with_items:
+       - developer
+       - suporte
+       - jefferson
+
+   - name: criando um arquivo temporario
+     file: 
+       path: "{{ item.arquivo }}"
+       state: "{{ item.tipo }}"
+     with_items:
+       - { arquivo: /tmp/devops, tipo: directory }
+       - { arquivo: /tmp/devops/file, tipo: touch }
+
+   - name: criando um arquivo escrevendo em temporario
+     lineinfile: 
+       path: /tmp/devops/file
+       line: 'sou devops'
+
+   - name: criando o segundo arquivo
+     blockinfile:
+       create: yes
+       path: /tmp/devops/file2
+       block: |
+         sou devops
+         na 4linux
+         com um bloco de conteudo em um arquivo
+
+   - name: instalando os pacotes basico Debian
+     package:
+       name: "{{ item.pacote }}"
+     when: ansible_os_family == item.distro
+     with_items:
+       - { pacote: git, distro: Debian }
+       - { pacote: vim, distro: Debian }
+       - { pacote: figlet, distro: Debian}
+       - { pacote: vim, distro: RedHat }
+       - { pacote: git, distro: RedHat }
+       - { pacote: epel-release, distro: RedHat }
+      

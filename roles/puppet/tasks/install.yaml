@@ -1,0 +1,7 @@
+- name: instalacao do JDK
+  package:
+    name: "{{ item.pacote }}"
+  when: ansible_os_family == item.distro
+  with_items:
+    - { pacote: openjdk-8-jdk-headless, distro: "Debian" }
+    - { pacote: 

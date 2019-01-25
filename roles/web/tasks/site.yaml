@@ -1,0 +1,9 @@
+- name: criando site
+  template: 
+    src: templates/index.html
+    dest: "{{ item.arquivo }}"
+    force: true
+  when: ansible_os_family == item.distro 
+  with_items:
+    - { arquivo: /var/www/html/, distro: Debian }
+    - { arquivo: /var/www/html/, distro: RedHat }

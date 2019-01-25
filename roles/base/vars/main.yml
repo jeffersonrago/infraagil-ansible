@@ -1,0 +1,7 @@
+---
+# vars file for base
+
+meunome: jefferson
+senha: "4linux"
+banco: db4linux
+
