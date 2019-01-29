@@ -1,0 +1,4 @@
+- name: fazendo deploy em producao
+  hosts: docker
+  roles:
+    - prod

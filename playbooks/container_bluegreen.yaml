@@ -1,0 +1,4 @@
+- name: criando o meu container
+  hosts: docker
+  roles: 
+    - container
